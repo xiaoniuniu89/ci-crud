@@ -1,6 +1,5 @@
 asgiref==3.5.2
 crispy-bootstrap5==0.6
-dj-database-url==0.5.0
 Django==3.2
 django-allauth==0.51.0
 django-appconf==1.0.5
