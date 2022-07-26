@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="container col-6 mt-5 ">
@@ -8,9 +9,7 @@
         <form  method="POST">
            {% csrf_token %}
            <div class="input-group">
-                <input type="hidden" name='action' value='create'>
-
-               <input type="text" name="goal" class="form-control mr-2 d-inline" placeholder="enter a new goal" required>
+                {{create_form|crispy}}
                <span class="mx-3 input-group-btn">
                     <button class="btn btn-info">add</button>
                 </span>

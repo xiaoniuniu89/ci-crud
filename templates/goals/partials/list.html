@@ -25,7 +25,7 @@
 
 <script>
     const setGoalUpdate = (goal_body, pk) => {
-    document.querySelector('#update-modal-input').innerHTML = goal_body
+    document.querySelector('#id_goal').innerHTML = goal_body
     document.querySelector('#update-form').setAttribute('action', `update-goal/${pk}/`)
 }
 
