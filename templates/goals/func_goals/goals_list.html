@@ -2,14 +2,31 @@
 {% load static %}
 {% block content %}
 
-<div class="container d-flex flex-column align-items-center justify-content center col-12 mt-5 ">
-    <h2>Welcome, {{user.username}}</h2>
-    
-    
-    <div id="todo-list">
-        {% include 'goals/partials/list.html' %}
-    </div> 
+<div class="container col-6 mt-5 ">
+    <h2 class='text-center'>Welcome, {{user.username}}</h2>
+
+        <form  method="POST">
+           {% csrf_token %}
+           <div class="input-group">
+                <input type="hidden" name='action' value='create'>
+
+               <input type="text" name="goal" class="form-control mr-2 d-inline" placeholder="enter a new goal" required>
+               <span class="mx-3 input-group-btn">
+                    <button class="btn btn-info">add</button>
+                </span>
+           </div>
+        </form>
+        
+        
+        <div id="goals-list">
+            {% include 'goals/partials/list.html' %}
+        </div>
+
+    </div>
 </div>
+{% include 'goals/partials/update_modal.html' %}
+{% include 'goals/partials/delete_modal.html' %}
+
 
 
 

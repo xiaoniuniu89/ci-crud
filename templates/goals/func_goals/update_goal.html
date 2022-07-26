@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container col-6 mt-5 ">
+
+    <form  method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" name="goal" class="form-control mr-2 d-inline" value="{{goal.body}}" required>
+            <span class="mx-3 input-group-btn">
+                <button class="btn btn-info">update</button>
+            </span>
+        </div>
+    </form>
+</div>
+
+
+{% endblock content %}
