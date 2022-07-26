@@ -12,13 +12,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 AUTH_TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates/allauth')
 
 if 'DEVELOPMENT' in os.environ:
-    SITE_ID = 1
+    SITE_ID = 2
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     # DEBUG = True
 else:
-    SITE_ID = 2
+    SITE_ID = 3
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     # DEBUG = False
+
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     "crispy_bootstrap5",
+    'goals',
 ]
 
 MIDDLEWARE = [
@@ -161,7 +163,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'goals/'
 LOGOUT_REDIRECT_URL = '/'
 
 
