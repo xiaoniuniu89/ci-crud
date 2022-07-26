@@ -3,10 +3,21 @@
 {% block content %}
 
 
-<h1 class="text-center">All auth starter</h1>
-{% if user.is_authenticated %}
-    <p class="text-center">Welcome {{user.username}}</p>
-{% endif %}
+<div class="container col-12 mt-5 ">
+    <div class="d-flex row mt-2 justify-content-around align-items-center">
+
+        <h1 class='text-center mb-3'>Goals</h1>
+
+        <div class="col-12 col-md-4">
+            {% include 'partials/hero.html' %}
+        </div>
+
+        <div class="col-12 col-md-6 flex-column ">
+            {% include 'partials/login.html' %}
+        </div>
+        
+    </div>
+</div>
 
 
 

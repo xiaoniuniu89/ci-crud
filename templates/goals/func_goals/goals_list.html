@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex flex-column align-items-center justify-content center col-12 mt-5 ">
+    <h2>Welcome, {{user.username}}</h2>
+    
+    
+    <div id="todo-list">
+        {% include 'goals/partials/list.html' %}
+    </div> 
+</div>
+
+
+
+{% endblock content %}
+
