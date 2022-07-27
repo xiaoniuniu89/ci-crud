@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-import dj_database_url
+
 
 if os.path.isfile('env.py'):
     import env
@@ -163,7 +163,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = 'goals/'
+LOGIN_REDIRECT_URL = '/goals/'
 LOGOUT_REDIRECT_URL = '/'
 
 
