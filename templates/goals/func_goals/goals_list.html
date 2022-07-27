@@ -4,6 +4,21 @@
 
 <div class="container d-flex flex-column align-items-center justify-content center col-12 mt-5 ">
     <h2>Welcome, {{user.username}}</h2>
+    {% if input_value %}
+      <p class="text-center">you typed {{input_value}} into the input box</p>
+  {% endif %}
+
+  {{anything}}
+
+    <form  method="POST">
+        {% csrf_token %}
+        <div class="  input-group">
+            <input class='form-control' name="goal" type="text">
+            <span class="mx-3 input-group-btn">
+                 <button class="btn btn-info">add</button>
+             </span>
+        </div>
+     </form>
     
     
     <div id="todo-list">
