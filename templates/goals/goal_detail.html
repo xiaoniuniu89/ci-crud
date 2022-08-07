@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-start">
+   <section class="col-sm-12 col-8">
+      
+      
+      
+   <div class="mb-2 list-group-item d-flex justify-content-between align-items-center">
+      
+       <span class='px-2'>{{object.body}}</span>
+       <div>
+       <a href="{% url 'update_goal_class' goal.pk %}" class="btn btn-success">Edit</a>
+       <a href="{% url 'delete_goal_class' goal.pk %}" class="btn btn-danger">Del</a>
+                 
+      
+       </div>
+    
+   </div>
+  
+   </section>
+  
+ 
+</div>
+{% endblock content %}

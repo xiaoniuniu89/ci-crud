@@ -1,0 +1,25 @@
+<!-- Modal -->
+<div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="deletegoal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deletegoal">delete Goal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="delete-form" method="POST">
+            {% csrf_token %}
+            <div >
+                <h2>Are you sure?</h2>
+                <div>
+                <button class="btn btn-danger">I'm sure</button>
+           
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </form>
+        </div>
+       
+      </div>
+    </div>
+  </div>

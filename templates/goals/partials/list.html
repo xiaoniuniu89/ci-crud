@@ -1,16 +1,16 @@
 <div class="d-flex justify-content-start">
     <section class="col-sm-12 col-8">
-        {% if goals %}
+        {% if object_list %}
    
         <ul class="list-group mt-3">
-            {% for goal in goals  %}
+            {% for goal in object_list  %}
                     <li class="mb-2 list-group-item d-flex justify-content-between align-items-center">
                       
                         <span class='px-2'>{{goal.body}}</span>
                        <div>
-                           <a href="{% url 'update_goal' goal.pk %}" class="btn btn-small btn-success">edit</a>
+                        <span onClick="setUpdateGoal('{{goal.body}}', '{{goal.pk}}')" data-bs-toggle="modal" data-bs-target="#update_modal" class="btn btn-small btn-success">edit</span>
                          
-                           <a href="{% url 'delete_goal' goal.pk %}" class="btn btn-small btn-danger">del</a>
+                        <span data-bs-toggle="modal" data-bs-target="#delete_modal" onClick="setGoalDelete('{{goal.pk}}')" class="btn btn-small btn-danger">del</a>
                        </div>
                     </li>
             {% endfor %}
@@ -23,3 +23,15 @@
   
    
  </div>
+
+ <script>
+    const setUpdateGoal = (goal_body, pk) => {
+    document.querySelector('#id_goal').innerHTML = goal_body
+    document.querySelector('#update-form').setAttribute('action', `update-goal/${pk}/`)
+ }
+
+ const setGoalDelete = (pk) => {
+    document.querySelector('#delete-form').setAttribute('action', `delete-goal/${pk}/`)
+ }
+ 
+ </script>

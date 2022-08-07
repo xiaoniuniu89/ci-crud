@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container d-flex flex-column align-items-center justify-content center col-12 mt-5 ">
+   <form  method="POST">
+       {% csrf_token %}
+       <div class="input-group">
+           {{form|crispy}}
+           <span class="mx-3 input-group-btn">
+                <button class="btn btn-info">submit</button>
+            </span>
+       </div>
+    </form>
+</div>
+{% endblock content %}
