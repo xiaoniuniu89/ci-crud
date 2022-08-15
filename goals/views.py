@@ -1,6 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_POST
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.views import View
+from django.views.generic import (
+   ListView,
+   CreateView,
+   UpdateView,
+   DeleteView,
+   DetailView
+)
 
 from .models import Goal
 from .forms import SimpleGoalForm, ModelGoalForm
@@ -42,3 +52,41 @@ def delete_goal(request, pk):
     if goal.user == request.user:
         goal.delete()
     return redirect('goals_list')
+
+
+# CBV 
+
+class GoalsListView(LoginRequiredMixin, ListView):
+  
+   def get_queryset(self):
+       queryset = self.request.user.goals.all()
+       return queryset
+
+class GoalDetailView(DetailView):
+   model = Goal
+ 
+ 
+class GoalCreateView(CreateView):
+   model = Goal
+   form_class = ModelGoalForm
+   success_url = reverse_lazy('goals_list')
+  
+   def form_valid(self, form):
+       form.instance.user = self.request.user
+       return super().form_valid(form)
+
+class GoalUpdateView(UserPassesTestMixin, UpdateView):
+   model = Goal
+   form_class = ModelGoalForm
+   success_url = reverse_lazy('goals_list')
+   
+   def test_func(self):
+    goal = self.get_object()
+    if self.request.user == goal.user:
+        return True
+    return False
+
+
+class GoalDeleteView(DeleteView):
+   model = Goal
+   success_url = reverse_lazy('goals_list')
