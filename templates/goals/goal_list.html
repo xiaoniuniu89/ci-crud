@@ -1,65 +1,37 @@
 {% extends 'base.html' %}
-{% block extra_css %}
-<!-- CDN -->
-<link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />{% endblock extra_css %}
+{% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
- <div id="calendar" style="height: 600px;"></div>
- <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.ie11.min.js"></script>
-<script>
-    const Calendar = tui.Calendar;
+<div class="container col-8 mt-5 ">
+    <h2 class='text-center'>Welcome, {{user.username|title}}</h2>
 
-    const container = document.getElementById('calendar');
-const options = {
-  defaultView: 'month',
-  timezone: {
-    zones: [
-      {
-        timezoneName: 'Europe/London',
-        displayLabel: 'London',
-      },
-    ],
-  },
-  calendars: [
-    {
-      id: 'cal1',
-      name: 'Personal',
-      backgroundColor: '#03bd9e',
-    },
-    {
-      id: 'cal2',
-      name: 'Work',
-      backgroundColor: '#00a9ff',
-    },
-  ],
-};
+        <form action="{% url 'goal_create_cbv' %}"  method="POST">
+           {% csrf_token %}
+           <div class="input-group">
+                {{create_form|crispy}}
+               <span class="mx-3 input-group-btn">
+                    <button class="btn btn-info">add</button>
+                </span>
+           </div>
+        </form>
+        
+        {% if is_cbv %}
+            <div id="goals-list">
+                {% include 'goals/partials/cbv_list.html' %}
+            </div>
+        {% else %}
+            <div id="goals-list">
+                {% include 'goals/partials/list.html' %}
+            </div>
+        {% endif %}
+        
 
-const calendar = new Calendar(container, options);
+    </div>
+</div>
 
-calendar.createEvents([
-  {
-    id: 'event1',
-    calendarId: 'cal2',
-    title: 'Weekly meeting',
-    start: '2022-08-07T09:00:00',
-    end: '2022-08-07T10:00:00',
-  },
-  {
-    id: 'event2',
-    calendarId: 'cal1',
-    title: 'Lunch appointment',
-    start: '2022-08-08T12:00:00',
-    end: '2022-08-08T13:00:00',
-  },
-  {
-    id: 'event3',
-    calendarId: 'cal2',
-    title: 'Vacation',
-    start: '2022-08-08',
-    end: '2022-08-10',
-    isAllday: true,
-    category: 'allday',
-  },
-]);
-  </script>
+
+
+
+
 {% endblock content %}
