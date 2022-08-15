@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
  
 {% block content %}
-<form method="POST">
- 
-   {% csrf_token %}
- 
-   <h3>Are you sure?</h3>
-   <button class='btn btn-danger' >I'm sure</button>
-   <a href="{% url 'goals_list' %}" class="btn btn-info">Cancel</a>
-</form>
+<div class="container mt-5 d-flex justify-content-center">
+    <form method="POST">
+    
+       {% csrf_token %}
+    
+       <h3>Are you sure?</h3>
+       <button class='btn btn-danger' >I'm sure</button>
+       <a href="{% url 'goals_list' %}" class="btn btn-info">Cancel</a>
+    </form>
+</div>
  
 {% endblock content %}

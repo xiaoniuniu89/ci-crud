@@ -122,4 +122,3 @@ class GoalDeleteView(DeleteView):
    success_url = reverse_lazy('goals_list')
 
 
-
