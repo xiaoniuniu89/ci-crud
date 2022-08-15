@@ -57,36 +57,45 @@ def delete_goal(request, pk):
 # CBV 
 
 class GoalsListView(LoginRequiredMixin, ListView):
+    
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        context["create_form"] = ModelGoalForm()
+        context["edit_form"] = SimpleGoalForm()
+        context["goals"] = self.request.user.goals.all()
+        context["is_cbv"] = True
+        return context
   
-   def get_queryset(self):
-       queryset = self.request.user.goals.all()
-       return queryset
+    def get_queryset(self):
+        queryset = self.request.user.goals.all()
+        return queryset
 
 class GoalDetailView(DetailView):
    model = Goal
  
  
 class GoalCreateView(CreateView):
-   model = Goal
-   form_class = ModelGoalForm
-   success_url = reverse_lazy('goals_list')
-  
-   def form_valid(self, form):
-       form.instance.user = self.request.user
-       return super().form_valid(form)
+    model = Goal
+    form_class = ModelGoalForm
+    success_url = reverse_lazy('goals_list_cbv')
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class GoalUpdateView(UserPassesTestMixin, UpdateView):
-   model = Goal
-   form_class = ModelGoalForm
-   success_url = reverse_lazy('goals_list')
-   
-   def test_func(self):
-    goal = self.get_object()
-    if self.request.user == goal.user:
-        return True
-    return False
+    model = Goal
+    form_class = ModelGoalForm
+    success_url = reverse_lazy('goals_list_cbv')
+    
+    def test_func(self):
+        goal = self.get_object()
+        if self.request.user == goal.user:
+            return True
+        return False
 
 
 class GoalDeleteView(DeleteView):
    model = Goal
-   success_url = reverse_lazy('goals_list')
+   success_url = reverse_lazy('goals_list_cbv')
